@@ -59,6 +59,24 @@ render_<View>.png  (1920×1080)  →  opens automatically
 
 No API keys needed for the default (Blender) path. Full details: **[docs/setup.md](docs/setup.md)**.
 
+## Run it on another PC (the easy way)
+Your friend's PC needs **AutoCAD 2025/2026**, the **.NET 8 SDK**, and **Blender 4.x**.
+
+1. **Download:** on the repo page click **Code ▸ Download ZIP** (or
+   `git clone https://github.com/jetskihetski-ux/InstantRender.git`) and unzip.
+2. **Install Blender 4.x** from https://www.blender.org/download/ (default location).
+3. Open **PowerShell** in the unzipped folder and run:
+   ```powershell
+   .\build-bundle.ps1 -Install
+   ```
+   This builds the plugin and installs it for AutoCAD automatically.
+4. **Restart AutoCAD** → an **Instant Render** ribbon tab appears. Open a floor
+   plan, click the button (or type `INSTANTRENDER`).
+
+If `dotnet` is missing, install the .NET 8 SDK:
+https://dotnet.microsoft.com/download/dotnet/8.0
+If Blender isn't in the default folder, see [docs/setup.md](docs/setup.md) step 2.
+
 ## Supported input
 - Entities: lines, polylines, arcs, block references, text/mtext.
 - Layers (case-insensitive, substring match): `WALL`/`WALLS`/`A-WALL`,
