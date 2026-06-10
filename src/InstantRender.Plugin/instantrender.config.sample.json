@@ -1,0 +1,16 @@
+{
+  "backend": "blender",
+  "outputDirectory": "",
+  "blender": {
+    "exePath": "",
+    "engine": "eevee",
+    "samples": 64,
+    "resolutionX": 1920,
+    "resolutionY": 1080,
+    "addCeiling": false
+  },
+  "gemini": {
+    "model": "gemini-2.5-flash-image",
+    "apiKey": "OPTIONAL_ONLY_IF_backend_IS_gemini_OR_USE_GEMINI_API_KEY_ENV"
+  }
+}

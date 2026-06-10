@@ -1,0 +1,19 @@
+# Build output
+bin/
+obj/
+*.user
+
+# Secrets / local config (holds the Gemini API key)
+instantrender.config.json
+
+# Generated renders
+InstantRender/
+*.png
+!docs/**/*.png
+
+# IDE
+.vs/
+
+# Python artifacts (from local script testing)
+__pycache__/
+*.pyc

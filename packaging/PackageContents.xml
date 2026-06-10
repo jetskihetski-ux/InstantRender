@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  AutoCAD plugin bundle manifest. When the InstantRender.bundle folder is placed
+  in  %APPDATA%\Autodesk\ApplicationPlugins\  AutoCAD auto-loads it on startup
+  and registers the INSTANTRENDER command + ribbon button.
+
+  SeriesMin="R25.0" = AutoCAD 2025. Use "R25.1" if you target 2026 only.
+-->
+<ApplicationPackage SchemaVersion="1.0"
+                    Name="InstantRender"
+                    AppVersion="1.0.0"
+                    ProductCode="{6F1B2A40-0001-4000-8000-00000000A001}"
+                    Author="Instant Render">
+  <CompanyDetails Name="Instant Render" />
+  <Components>
+    <RuntimeRequirements OS="Win64" Platform="AutoCAD" SeriesMin="R25.0" />
+    <ComponentEntry AppName="InstantRender"
+                    ModuleName="./Contents/InstantRender.dll"
+                    LoadOnAutoCADStartup="True"
+                    LoadOnCommandInvocation="True">
+      <Commands GroupName="InstantRenderCmds">
+        <Command Global="INSTANTRENDER" Local="INSTANTRENDER" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+</ApplicationPackage>

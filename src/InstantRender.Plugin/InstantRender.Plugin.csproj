@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Instant Render - AutoCAD 2025+ plugin (.NET 8).
+    AutoCAD 2025 and 2026 run on .NET 8 (net8.0-windows).
+
+    The AutoCAD managed DLLs are NOT redistributable, so they are referenced
+    from your local AutoCAD install via the $(AcadDir) property below and are
+    marked Private=false (CopyLocal=false) so they are never copied to output.
+
+    Override the AutoCAD path at build time if yours differs:
+      dotnet build -c Release -p:AcadDir="C:\Program Files\Autodesk\AutoCAD 2026\"
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <!-- Ribbon button uses WPF types (ICommand, Orientation, tooltips). -->
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>InstantRender</AssemblyName>
+    <RootNamespace>InstantRender</RootNamespace>
+    <Platforms>AnyCPU</Platforms>
+
+    <!-- Default AutoCAD 2025 managed assembly location. Change as needed. -->
+    <AcadDir Condition="'$(AcadDir)' == ''">C:\Program Files\Autodesk\AutoCAD 2025\</AcadDir>
+
+    <!-- Plugins must not copy the AutoCAD assemblies; AutoCAD loads its own. -->
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- AutoCAD .NET API (managed). Private=false => not copied to output. -->
+    <Reference Include="AcCoreMgd">
+      <HintPath>$(AcadDir)AcCoreMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AcDbMgd">
+      <HintPath>$(AcadDir)AcDbMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AcMgd">
+      <HintPath>$(AcadDir)AcMgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <!-- Ribbon / UI (AdWindows ships the RibbonControl types). -->
+    <Reference Include="AdWindows">
+      <HintPath>$(AcadDir)AdWindows.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AcWindows">
+      <HintPath>$(AcadDir)AcWindows.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- System.Text.Json ships in the .NET 8 runtime; no package needed. -->
+    <None Update="instantrender.config.sample.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <!-- Blender render script must sit next to the DLL under scripts\. -->
+    <None Include="..\..\scripts\render_scene.py" Link="scripts\render_scene.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
