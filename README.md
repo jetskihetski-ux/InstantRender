@@ -108,3 +108,6 @@ so you can test rendering from a `scene.json` without AutoCAD.
   (layout stays exact, only look varies).
 - AI room detection, auto-furnishing, style presets, cloud rendering,
   Revit/SketchUp export.
+
+
+  still work in progress
